@@ -1,6 +1,6 @@
 # Usado para testing
 
-from regresion import *
+from Proyecto1 import *
 import csv
 import os
 import numpy as np
@@ -20,8 +20,7 @@ def fileData():
             x.append(float(row[0]))
             y.append(float(row[1]))
 
-    x = np.array(x)
-    x = np.c_[np.ones(x.shape[0]), x]  # Agregar una columna de unos para el término de sesgo
+    x = np.array(x)  # Mantener solo la columna original de valores de x
     y = np.array(y)
 
     return x, y

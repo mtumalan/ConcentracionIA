@@ -17,13 +17,13 @@ def graficaDatos(x, y, theta):
     Salida:
     Grafica de los datos
     '''
-    plt.plot(x[:, 1], y, 'rx')
-    plt.plot(x[:, 1], np.dot(x, theta))
+    plt.plot(x, y, 'rx')
+    plt.plot(x, theta[0] + theta[1] * x)
     plt.show()
 
 def gradienteDescendiente(x, y, theta = np.array([0, 0], dtype=float), alpha = 0.01, iteraciones = 1500):
     '''
-    Calcula la regresion lineal de un conjunto de datos
+    Calcula la regresion lineal de un conjunto de datos con el metodo de gradiente descendente
     
     Parametros:
     x -- vector de entrada
@@ -35,11 +35,17 @@ def gradienteDescendiente(x, y, theta = np.array([0, 0], dtype=float), alpha = 0
     Salida:
     theta -- vector de parametros
     '''
-    m = len(y)
+    m = len(y) # Numero de datos
     for i in range(iteraciones):
-        h = np.dot(x, theta)
-        theta = theta - alpha * (1/m) * np.dot(x.T, h - y)
+        # Calcular la hipótesis
+        h = theta[0] + theta[1] * x
+        
+        # Actualizar theta
+        theta[0] = theta[0] - alpha * (1/m) * np.sum(h - y)
+        theta[1] = theta[1] - alpha * (1/m) * np.sum((h - y) * x)
+    
     return theta
+
 
 def calculaCosto(x, y, theta):
     '''
@@ -54,6 +60,6 @@ def calculaCosto(x, y, theta):
     j -- costo
     '''
     m = len(y)
-    h = np.dot(x, theta)
+    h = theta[0] + theta[1] * x
     j = (1/(2*m)) * np.sum(np.square(h - y))
     return j
