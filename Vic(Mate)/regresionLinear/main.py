@@ -4,12 +4,14 @@ from Proyecto1 import *
 import csv
 import os
 import numpy as np
+import matplotlib
+matplotlib.use('TkAgg')
 
 # Datos de entrada
 
 def fileData():
     path = os.getcwd()
-    filepath = r"\Vic(Mate)\regresionLinear\ex1data1.txt"
+    filepath = "/ex1data1.txt"
     path2file = path + filepath
 
     x = []
@@ -20,7 +22,7 @@ def fileData():
             x.append(float(row[0]))
             y.append(float(row[1]))
 
-    x = np.array(x)  # Mantener solo la columna original de valores de x
+    x = np.array(x)
     y = np.array(y)
 
     return x, y
@@ -32,7 +34,7 @@ x, y = fileData()
 theta = np.array([0, 0], dtype=float)
 
 # Aplicar el método de gradiente descendiente
-theta = gradienteDescendiente(x, y, theta)
+theta = gradienteDescendiente(x, y, theta, 0.01.)
 
 # Calcular el costo final
 cost = calculaCosto(x, y, theta)
