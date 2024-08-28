@@ -34,7 +34,7 @@ x, y = fileData()
 theta = np.array([0, 0], dtype=float)
 
 # Aplicar el método de gradiente descendiente
-theta = gradienteDescendiente(x, y, theta, 0.01.)
+theta = gradienteDescendiente(x, y, theta, 0.01)
 
 # Calcular el costo final
 cost = calculaCosto(x, y, theta)
