@@ -88,7 +88,7 @@ def plot(data,test,predicted,figsize=(5,6)):
     test = [reshape(t) for t in test]
     predicted = [reshape(p) for p in predicted]
 
-    fig, ax = plt.subplots(9, 3, figsize=figsize)
+    fig, ax = plt.subplots(8, 3, figsize=figsize)
     for i in range(len(data)):
         if i==0:
             ax[i, 0].set_title('Train data')
@@ -125,11 +125,10 @@ def main():
     img4 = rgb2gray(skimage.data.chelsea())  # RGB, necesita conversion
     img5 = skimage.data.clock()
     img6 = skimage.data.coins()
-    img7 = skimage.data.horse() 
-    img8 = rgb2gray(skimage.data.hubble_deep_field())  # RGB, necesita conversion
-    img9 = skimage.data.moon()
+    img7 = rgb2gray(skimage.data.hubble_deep_field())  # RGB, necesita conversion
+    img8 = skimage.data.moon()
 
-    data = [img1, img2, img3, img4, img5, img6, img7, img8, img9]
+    data = [img1, img2, img3, img4, img5, img6, img7, img8]
 
     # Preprocesamiento
     w, h = 128, 128
