@@ -20,7 +20,7 @@ class HopfieldNetwork(object):
         W = np.zeros((self.numneurons, self.numneurons))
         rho = np.sum([np.sum(t) for t in training_data]) / (num_data*self.numneurons)
 
-        # Hebbian learning
+        # Hebbi learning
         for i in range(num_data):
             t = training_data[i] - rho
             W += np.outer(t, t)
@@ -61,7 +61,7 @@ class HopfieldNetwork(object):
     
     def plot_weights(self):
         plt.figure()
-        plt.imshow(self.W, cmap='gray')
+        plt.imshow(self.W)
         plt.colorbar()
         plt.title('W')
         plt.show()
@@ -88,7 +88,7 @@ def plot(data,test,predicted,figsize=(5,6)):
     test = [reshape(t) for t in test]
     predicted = [reshape(p) for p in predicted]
 
-    fig, ax = plt.subplots(8, 3, figsize=figsize)
+    fig, ax = plt.subplots(9, 3, figsize=figsize)
     for i in range(len(data)):
         if i==0:
             ax[i, 0].set_title('Train data')
@@ -103,7 +103,7 @@ def plot(data,test,predicted,figsize=(5,6)):
         ax[i, 2].axis('off')
 
     plt.tight_layout()
-    plt.savefig('hopfield.png')
+    plt.savefig('hopfield60.png')
     #plt.show()
 
 def preprocessing(img, w, h):
@@ -127,8 +127,15 @@ def main():
     img6 = skimage.data.coins()
     img7 = rgb2gray(skimage.data.hubble_deep_field())  # RGB, necesita conversion
     img8 = skimage.data.moon()
+    img9 = skimage.data.horse()
 
-    data = [img1, img2, img3, img4, img5, img6, img7, img8]
+    data = [img1, img2, img3, img4, img5, img6, img7, img8, img9]
+    #show original images
+    fig, ax = plt.subplots(1, 9, figsize=(20, 10))
+    for i in range(len(data)):
+        ax[i].imshow(data[i], cmap='gray')
+        ax[i].axis('off')
+    plt.savefig('original.png')
 
     # Preprocesamiento
     w, h = 128, 128
