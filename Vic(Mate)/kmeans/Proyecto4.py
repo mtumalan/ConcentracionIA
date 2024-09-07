@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.image import imread
+from PIL import Image
 
 def kMeansInitCentroids(X, K):
     '''
@@ -66,16 +66,25 @@ def runkMeans(X, initial_centroids, max_iters=500, true=True):
 
     return clusters, centroides
 
+def read_image(image_path):
+    '''
+    Lee una imagen png
+    '''
+    data = []
+    with open(image_path, 'r') as f:
+        for line in f:
+            data.append([float(x) for x in line.strip().split(' ')])
+    return data
+
 def compress_image_kmeans(image_path, K, max_iters):
     '''
     Comprime una imagen png usando k-means
     '''
     # Load image
-    image = imread(image_path)
-    
-    # Handle RGBA images (discard alpha channel)
-    if image.shape[-1] == 4:
-        image = image[..., :3]
+    image = Image.open(image_path).convert('RGB')
+
+    # Convert image to numpy array
+    image = np.array(image)
     
     # Normalize the image to [0, 1]
     image = image / 255.0
